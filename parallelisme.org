@@ -98,6 +98,8 @@ gcc -Wall -fopenmp Codeparallelisme/startOmp.c -o bin/startOmp
 bin/startOmp
 #+END_SRC
 
+La version OpenMP produit deux variantes:
+
 : hello world! de 0
 : hello world! de 1
 
@@ -106,9 +108,17 @@ et
 : hello world! de 1
 : hello world! de 0
 
+** Démarrer des threads en Java
+
 ** Démarrer des threads en Cilk+
 
-** Démarrer des threads en Java
+#+INCLUDE: Codeparallelisme/startCilk.c src C
+
+#+BEGIN_SRC sh :exports code
+gcc -Wall -std=gnu11 -fcilkplus Codeparallelisme/startCilk.c -o bin/startCilk
+bin/startCilk
+#+END_SRC
+
 
 ** Démarrer des go-routine en Go
 
