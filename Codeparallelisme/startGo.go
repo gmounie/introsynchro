@@ -10,7 +10,7 @@ func hello(i int, c chan int) {
 func main() {
 	fini := make(chan int)
 	go hello(0, fini)
-	go hello(2, fini)
+	go hello(1, fini)
 	<- fini
 	<- fini
 }
