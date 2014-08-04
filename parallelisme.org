@@ -35,7 +35,7 @@ et au matériel comment faire plusieurs choses à la fois.
   Les codes suivants réalisent un "hello world" parallèle.
 
 ** Démarrer des threads en C
-   
+*** TODO Attendre la version de la glibc avec threads.h
 
 ** Démarrer des POSIX threads en C
    En pratique, la bibliothèque de threads implantée sous Linux est la
@@ -59,7 +59,53 @@ produit l'affichage suivant
 
 ** Démarrer des threads en C++
 
+#+INCLUDE: Codeparallelisme/startCpp.cpp src C++
+
+La compilation et l'exécution sont intéressantes. Avec les iostream,
+on a parfois des mélanges intéressants. Pour observer ce mélange en C
+avec printf, il faudrait probablement des sorties beaucoup plus
+longues.
+
+*** TODO Pourquoi les sorties en C++ se mélangent-t-elle ? 
+
+#+BEGIN_SRC sh :exports code
+g++ -Wall -std=gnu++11 Codeparallelisme/startCpp.cpp -lpthread -o bin/startCpp
+bin/startCpp
+#+END_SRC
+
+on obtient comme en C
+
+: hello world! de 0
+: hello world! de 1
+
+mais aussi parfois
+
+: hello world! de hello world! de 10
+: 
+
+
+et
+
+: hello world! de hello world! de 0
+: 1
+
+
 ** Démarrer des tasks en OpenMP
+
+#+INCLUDE: Codeparallelisme/startOmp.c src C
+
+#+BEGIN_SRC sh :exports code
+gcc -Wall -fopenmp Codeparallelisme/startOmp.c -o bin/startOmp
+bin/startOmp
+#+END_SRC
+
+: hello world! de 0
+: hello world! de 1
+
+et
+
+: hello world! de 1
+: hello world! de 0
 
 ** Démarrer des threads en Cilk+
 
