@@ -1,0 +1,94 @@
+Les architectures modernes sont capable de faire plusieurs opérations
+simultanément de manière quasi-transparente pour le programmeur:
+- avec l'exécution out-of-order des instructions du processeur
+- en exécutant plusieurs flots d'instruction simultanément pour
+  recouvrir les temps d'accès à la RAM ("l'hyperthreading" pour Intel)
+- en faisant des calculs vectoriels
+
+Ce parallélisme automatique est loin de refleter le potentiel
+parallèle de la plupart des applications.
+
+Les compilateurs ne sont pas capable de l'extraire de manière
+automatique, même pour des langages "simples" comme Fortran.
+
+Donc le programmeur doit faire le travail d'expliquer au compilateur
+et au matériel comment faire plusieurs choses à la fois.
+
+* Comment lancer plusieurs activités partageant la même mémoire
+
+  Dans la plupart des languages modernes, faire plusieurs choses à la
+  fois dans le même espace de mémoire, i.e. dans le même processus, est
+  souvent relativement facile à faire:
+  - parce que c'est prévu dans le language: Go, Cilk, OpenMP, Ruby
+  - parce que c'est prévu dans la bibliothèque standard du langage: C,
+    C++, D, Ada, Java, Perl, Python
+
+  Cela n'a pas toujours été évident: il a fallu attendre la norme
+  C-11, 40 ans après le début du langage, pour avoir des threads en C.
+
+  Python et ruby, en collant aux opérateurs des langages compilés,
+  atteignent pour l'instant un parallélisme limité. Perl, qui a pris
+  un autre chemin, permet un parallélisme performant au prix d'une
+  gymnastique intellectuelle différente des gymnastiques classiques.
+
+  Les codes suivants réalisent un "hello world" parallèle.
+
+** Démarrer des threads en C-11
+
+** Démarrer des POSIX threads
+   En pratique, la bibliothèque de threads implanté sous Linux est la
+   bibliothèque POSIX.
+
+#+NAME: startC99
+#+BEGIN_SRC C :exports both
+  #include <stdio.h>
+  #include <pthread.h>
+
+  void *hello(void *a) {
+    printf ("hello world! de %d\n", (int)a);
+    return 0;
+  }
+
+  int main(int argc, char **argv) {
+    (void)argc;
+    (void) argv;
+    pthread_t tid[2];
+
+    for (int i=0; i < 2; i++) {
+      pthread_create(& tid[i], NULL, hello, (void *)i);
+    }
+
+    for (int i=0; i < 2; i++) {
+      void *status;
+      pthread_join(& tid[i], & status);
+    }
+
+    return 0;
+  }
+#+END_SRC
+
+ce qui affiche
+
+#+RESULTS startC99
+
+** Démarrer des threads en C++
+
+** Démarrer des threads en Java
+
+** Démarrer des go-routine en Go
+
+** Démarrer des Tasks en Ada
+
+** Démarrer des threads en D
+
+** Démarrer des threads en Python
+
+** Démarrer des threads en Ruby
+
+** Le parallélisme en Perl
+
+
+* Incrémenter une variable à plusieurs threads
+
+
+* La section critique
