@@ -25,7 +25,7 @@
 #+HTML_LINK_UP:
 #+HTML_MATHJAX:
 #+INFOJS_OPT:
-#+LATEX_HEADER: book
+#+LATEX_HEADER:
 
 #+OPTIONS: texht:t
 #+LATEX_CLASS: book
@@ -63,4 +63,6 @@ en plusieurs langages.
 
 * Les futex
 
+* Les Windows threads
+  expliquer les nuances, comme les fibres (fiber).
 * Autres idées

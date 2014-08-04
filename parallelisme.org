@@ -1,9 +1,10 @@
-Les architectures modernes sont capable de faire plusieurs opérations
+Les architectures modernes sont capables de faire plusieurs opérations
 simultanément de manière quasi-transparente pour le programmeur:
 - avec l'exécution out-of-order des instructions du processeur
 - en exécutant plusieurs flots d'instruction simultanément pour
   recouvrir les temps d'accès à la RAM ("l'hyperthreading" pour Intel)
-- en faisant des calculs vectoriels
+- en faisant des calculs vectoriels (là les compilateurs ont encore
+  des progrès à faire)
 
 Ce parallélisme automatique est loin de refleter le potentiel
 parallèle de la plupart des applications.
@@ -33,45 +34,34 @@ et au matériel comment faire plusieurs choses à la fois.
 
   Les codes suivants réalisent un "hello world" parallèle.
 
-** Démarrer des threads en C-11
+** Démarrer des threads en C
+   
 
-** Démarrer des POSIX threads
-   En pratique, la bibliothèque de threads implanté sous Linux est la
-   bibliothèque POSIX.
+** Démarrer des POSIX threads en C
+   En pratique, la bibliothèque de threads implantée sous Linux est la
+   bibliothèque POSIX. C'est elle qui est utilisé par la bibliothèque
+   de C et de la quasi-totalité des autres languages.
 
-#+NAME: startC99
-#+BEGIN_SRC C :exports both
-  #include <stdio.h>
-  #include <pthread.h>
+#+INCLUDE: Codeparallelisme/startC99.c src C
 
-  void *hello(void *a) {
-    printf ("hello world! de %d\n", (int)a);
-    return 0;
-  }
+ce qui après compilation et exécution
 
-  int main(int argc, char **argv) {
-    (void)argc;
-    (void) argv;
-    pthread_t tid[2];
-
-    for (int i=0; i < 2; i++) {
-      pthread_create(& tid[i], NULL, hello, (void *)i);
-    }
-
-    for (int i=0; i < 2; i++) {
-      void *status;
-      pthread_join(& tid[i], & status);
-    }
-
-    return 0;
-  }
+#+BEGIN_SRC sh :exports both
+gcc -Wall -std=gnu99 Codeparallelisme/startC99.c -o bin/startC99 -lpthread
+bin/startC99
 #+END_SRC
 
-ce qui affiche
+produit l'affichage suivant
 
-#+RESULTS startC99
+#+RESULTS:
+| hello | world! | de | 0 |
+| hello | world! | de | 1 |
 
 ** Démarrer des threads en C++
+
+** Démarrer des tasks en OpenMP
+
+** Démarrer des threads en Cilk+
 
 ** Démarrer des threads en Java
 
@@ -90,5 +80,6 @@ ce qui affiche
 
 * Incrémenter une variable à plusieurs threads
 
+** le problème en C
 
 * La section critique
