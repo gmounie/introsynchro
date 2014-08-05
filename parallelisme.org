@@ -20,19 +20,24 @@ et au matériel comment faire plusieurs choses à la fois.
   Dans la plupart des languages modernes, faire plusieurs choses à la
   fois dans le même espace de mémoire, i.e. dans le même processus, est
   souvent relativement facile à faire:
-  - parce que c'est prévu dans le language: Go, Cilk, OpenMP, Ruby
+  - parce que c'est prévu dans le language: Go, Cilk, OpenMP, Ruby, Java
   - parce que c'est prévu dans la bibliothèque standard du langage: C,
     C++, D, Ada, Java, Perl, Python
 
   Cela n'a pas toujours été évident: il a fallu attendre la norme
   C-11, 40 ans après le début du langage, pour avoir des threads en C.
+  
+  En Java, l'interface intégrée au langage à l'origine était un peu
+  trop simpliste. Une interface de type POSIX a été ensuite rajoutée
+  dans la bibliothèque.
 
   Python et ruby, en collant aux opérateurs des langages compilés,
   atteignent pour l'instant un parallélisme limité. Perl, qui a pris
   un autre chemin, permet un parallélisme performant au prix d'une
   gymnastique intellectuelle différente des gymnastiques classiques.
 
-  Les codes suivants réalisent un "hello world" parallèle.
+  Les codes suivants réalisent un "hello world" parallèle: deux hello à la
+  fois.
 
 ** Démarrer des threads en C
 *** TODO Attendre la version de la glibc avec threads.h
@@ -119,20 +124,63 @@ gcc -Wall -std=gnu11 -fcilkplus Codeparallelisme/startCilk.c -o bin/startCilk
 bin/startCilk
 #+END_SRC
 
+L'exécution en Cilk+ est très stable.
 
-** Démarrer des go-routine en Go
+: hello world! de 0
+: hello world! de 1
+
+
+** Démarrer des go-routines en Go
+
+#+INCLUDE: Codeparallelisme/startGo.go src go
+
+Sans le channel pour la terminaison, le main et le processus termine
+avant l'exécution des fonctions et l'on obtient aucun affichage.
+
+#+BEGIN_SRC sh :exports code
+go build -o -o bin/startGo Codeparallelisme/startGo.o 
+bin/startGo
+#+END_SRC
+
+Une exécution très stable.
+
+: Hello world! de  0
+: Hello world! de  1
 
 ** Démarrer des Tasks en Ada
 
 ** Démarrer des threads en D
 
+Une particularité importante est le fait que le main attende la
+fin de tous les threads "spawnés" avant de terminer le processus.
+
+#+INCLUDE: Codeparallelisme/startD.d src D
+
+
+La compilation et le lancement
+#+BEGIN_SRC sh :exports code
+gdc -Wall -o ../bin/startD startD.d
+bin/startD
+#+END_SRC
+
+donne systématiquement
+
+: hello world! de 1
+: hello world! de 0
+
 ** Démarrer des threads en Python
+   
+
+#+INCLUDE: Codeparallelisme/startPy.py src python
+
+En python aussi une particularité importante est que le main attende la fin
+des threads.
 
 ** Démarrer des threads en Ruby
 
 ** Le parallélisme en Perl
 
-
+   
 * Incrémenter une variable à plusieurs threads
 
 ** le problème en C
