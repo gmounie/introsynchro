@@ -39,8 +39,21 @@ et au matériel comment faire plusieurs choses à la fois.
   Les codes suivants réalisent un "hello world" parallèle: deux hello à la
   fois.
 
+** Points importants des exemples suivants
+   Exécution: un core-i7 quad-core hyperthreadé
+   - le multiplexage de l'accès au même fichier:
+     - en C, on lance les threads qui affichent toujours dans le même
+       ordre (très léger); contrairement à OpenMP dont l'ordre varie
+       beaucoup (créations de tâches et des threads séparé)
+     - en C++, contrairement à tous (?) les autres exemples, les sorties se
+       mélangent: (stream != printf)
+     - En Go il faut attendre explicitement la fin des go-routines, en
+       OpenMP, ou en D, l'attente est implicite.
+
+
+
 ** Démarrer des threads en C
-*** TODO Attendre la version de la glibc avec threads.h
+*** TODO Attendre la version de la glibc avec threads.h (C11)
 
 ** Démarrer des POSIX threads en C
    En pratique, la bibliothèque de threads implantée sous Linux est la
@@ -168,6 +181,8 @@ donne systématiquement
 : hello world! de 1
 : hello world! de 0
 
+** Démarrer des threads en Objective-C
+
 ** Démarrer des threads en Python
    
 
@@ -180,9 +195,5 @@ des threads.
 
 ** Le parallélisme en Perl
 
+
    
-* Incrémenter une variable à plusieurs threads
-
-** le problème en C
-
-* La section critique
