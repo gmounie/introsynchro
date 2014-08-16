@@ -1,0 +1,27 @@
+
+Dans les environnements de haut niveau, il est possible d'attendre la
+production asynchrone d'une donnée.
+
+* Fibonacci récursif
+
+C'est souvent le premier exemple de code récursif. Il permet aussi de
+comparer les exécutions et la transmission de données produite de
+manière asynchrone.
+
+** Exemple en C
+
+** Exemple en OpenMP
+
+** Exemple en C++
+
+En C++, il existe les promises et les futures pour assurer la
+transmission des résultats.
+
+#+INCLUDE: CodeFibo/fiboCpp.cpp src C++
+
+Note que l'exécution ici, ne parallélise rien par défaut mais exécute
+tous les appels en différé.
+
+** Exemple en Go
+
+En Go cela est réalisé par les channels
