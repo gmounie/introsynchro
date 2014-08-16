@@ -47,7 +47,9 @@ en plusieurs langages.
 
 #+INCLUDE: parallelisme.org
 
-* Le problème de base
+* Faire la même chose à plusieurs
+
+#+INCLUDE: incrementation.org
 
 * Les moniteurs
 
