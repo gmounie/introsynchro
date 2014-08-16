@@ -20,7 +20,7 @@
    plus long que le temps de création. (2000 incrémentations pour mon
    core-i7)
 
-#+INCLUDE: CodeIncrementation/incCpp.cpp source c++
+#+INCLUDE: CodeIncrementation/incCpp.cpp src C++
 
 #+BEGIN_SRC sh :exports code
 g++ -Wall -o bin/incCpp -std=gnu++11 -O3 CodeIncrementation/incCpp.cpp -lpthread
@@ -28,8 +28,8 @@ bin/incCpp
 #+END_SRC
 
 produit l'affichage suivant (systématique)
-: compteur: 6803 en 0.000236401 s                       
-: compteur avec lock: 8000 en 0.00128601 s
-: compteur atomic: 8000 en 0.000228245 s  
+: compteur: 7322 en 375 µs
+: compteur avec lock: 8000 en 1810 µs
+: compteur atomic: 8000 en 357 µs
 
 * La section critique

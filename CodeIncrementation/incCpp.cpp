@@ -40,15 +40,15 @@ void helloa(atomic<int> *c, int stride) {
   
 template< class Function, class countp > 
 double QuatreThreads(Function &&f, countp c, int stride) {
-  auto start = chrono::system_clock::now(); 
+  auto start = chrono::high_resolution_clock::now(); 
   array<thread, 4> threads = { thread(f, c, stride), thread(f, c, stride), thread(f, c, stride),
 			       thread(f, c, stride)};
 
   for(auto & th: threads ) {
     th.join();
   }
-  auto end = chrono::system_clock::now();
-  return chrono::duration<double>(end - start).count();
+  auto end = chrono::high_resolution_clock::now();
+  return chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 }
 
 int main(int argc, char **argv) {
@@ -60,14 +60,14 @@ int main(int argc, char **argv) {
 					 // stride de 0 !
 
   double t = QuatreThreads(hello, &compteur, stride);
-  cout << "compteur: " << compteur << " en " << t << " s" << endl;
+  cout << "compteur: " << compteur << " en " << t << " µs" << endl;
 
   t = QuatreThreads(hellol, &compteurl, stride);
-  cout << "compteur avec lock: " << compteurl << " en " << t << " s"  << endl;
+  cout << "compteur avec lock: " << compteurl << " en " << t << " µs"  << endl;
 
   compteura.store(0);
   t = QuatreThreads(helloa, &compteura, stride);
-  cout << "compteur atomic: " << compteura << " en " << t << " s"  << endl;
+  cout << "compteur atomic: " << compteura << " en " << t << " µs"  << endl;
   return 0;
 
 }
