@@ -21,7 +21,8 @@ int main(int argc, char **argv) {
       {
 	hello(1);
       }
-#pragma omp taskwait
+      // l'attente est implicite en fin de bloc
+      // #pragma omp taskwait
     } 
   }
   return 0;
