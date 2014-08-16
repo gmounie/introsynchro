@@ -1,0 +1,35 @@
+* Incrémenter une variable à plusieurs threads
+
+  Dans cette section nous montrons que faire l'incrémentation de manière
+  simpliste ne marche pas dans la plupart des cas.
+
+  Deux solutions sont montrés ici:
+  1. protéger la section critique par un accès exclusif (mutex)
+  2. utiliser des opérations atomiques
+
+  Les temps d'exécutions sont comparés.
+   
+** le problème en C
+
+** Le problème en C++
+   Le code comparant les résultats et temps d'exécution de
+   l'incrémentation simple, celle avec un mutex puis celle avec les
+   opérations atomiques.
+
+   Cela ne marche pas dès que le temps d'exécution des threads est
+   plus long que le temps de création. (2000 incrémentations pour mon
+   core-i7)
+
+#+INCLUDE: CodeIncrementation/incCpp.cpp source c++
+
+#+BEGIN_SRC sh :exports code
+g++ -Wall -o bin/incCpp -std=gnu++11 -O3 CodeIncrementation/incCpp.cpp -lpthread
+bin/incCpp
+#+END_SRC
+
+produit l'affichage suivant (systématique)
+: compteur: 6803 en 0.000236401 s                       
+: compteur avec lock: 8000 en 0.00128601 s
+: compteur atomic: 8000 en 0.000228245 s  
+
+* La section critique
