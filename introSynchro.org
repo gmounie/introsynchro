@@ -51,6 +51,10 @@ en plusieurs langages.
 
 #+INCLUDE: incrementation.org
 
+* transmettre des données
+
+#+INCLUDE: asyncdata.org
+
 * Les moniteurs
 
 * Les sémaphores
