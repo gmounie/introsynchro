@@ -9,10 +9,28 @@
 
   Les temps d'exécutions sont comparés.
    
-** le problème en C
+** le problème en C (Posix Thread)
+   Le code compare les résultats et temps d'exécution de
+   l'incrémentation simple, celle avec un mutex puis celle avec les
+   opérations atomiques. (2000 incrémentations pour mon
+   core-i7, marche aussi avec 1000 mais pas systématique)
+
+#+INCLUDE: CodeIncrementation/incPthread.c src C
+
+#+BEGIN_SRC sh :exports code
+gcc -Wall -o bin/incPthread -std=gnu11 -O3 CodeIncrementation/incPthread.c -lpthread
+bin/incPthread
+#+END_SRC
+
+
+produit l'affichage suivant
+: compteur: 4923 en 0.000381028
+: compteur avec lock: 8000 en 0.00358699
+: compteur atomic: 8000 en 0.00094466
+
 
 ** Le problème en C++
-   Le code comparant les résultats et temps d'exécution de
+   Le code compare les résultats et temps d'exécution de
    l'incrémentation simple, celle avec un mutex puis celle avec les
    opérations atomiques.
 
