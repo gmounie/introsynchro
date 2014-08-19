@@ -8,12 +8,16 @@
   2. utiliser des opérations atomiques
 
   Les temps d'exécutions sont comparés.
-   
+
+  Le code C et C++ utilise une variable stride, qui sert à empêcher
+  le compilateur d'optimiser le code, sinon, il va générer un code qui
+  va directement faire la somme des incrémentations.
+
 ** le problème en C (Posix Thread)
    Le code compare les résultats et temps d'exécution de
    l'incrémentation simple, celle avec un mutex puis celle avec les
    opérations atomiques. (2000 incrémentations pour mon
-   core-i7, marche aussi avec 1000 mais pas systématique)
+   core-i7. Cela marche aussi avec 1000 mais pas de façon systématique)
 
 #+INCLUDE: CodeIncrementation/incPthread.c src C
 
