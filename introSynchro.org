@@ -36,12 +36,37 @@
 
 * Motivation, contenu et pré-requis
 
-Le but est de regrouper des exercices, du code et des idées pour
+Le but est ici de regrouper des exercices, du code et des idées pour
 comprendre et faire comprendre les synchronisations utilisés dans les
 programmes parallèles modernes.
 
 Comme la langue influence la pensée, les exemples sont volontairement
 en plusieurs langages.
+
+** Pré-requis
+
+Un ordinateur est une machine stupide [Gerard Berry], elle connait les
+4 opération en base 0 et 1, mais avec une capacité stockage
+d'information gigantesque, la capacité d'un disque dur est de l'odre
+de la masse solaire de notre galaxie, et rapide, puisque pendant une
+opération à 4Ghz, un photon parcourt 7.5cm.
+
+L'informatique consiste donc à faire faire des choses intelligentes à
+une machine ne sachant faire que des choses élémentaires stupides.
+
+Pour cela, il y a 4 grands pans complémentaires à la discipline:
+- matériel :: comment construire cette machine stupide
+- algorithmique :: comment faire une chose intelligente de manière
+                   indépendante du matériel, mais évaluer sa
+                   performance en fonction du matériel
+- compilation :: traduire un langage précis, utilisé pour instancier
+                 un algorithme, dans les instructions élémentaires du
+                 matériel.
+- données :: l'art de manipuler des données est utilisé par les trois
+             pans précédents.
+
+Le parallélisme, c'est l'art de faire plusieurs choses stupides en même
+temps et cela à un impact sur les 4 pans.
 
 * Faire plusieurs choses à la fois
 
