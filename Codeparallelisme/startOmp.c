@@ -17,15 +17,18 @@ int main(int argc, char **argv) {
   {
 #pragma omp single
     {
-      for(int i; i < NBTHR; i++) {
 #pragma omp task
-	{
-	  hello(i);
+      {
+	for(int i; i < NBTHR; i++) {
+#pragma omp task
+	  {
+	    hello(i);
+	  }
 	}
-      }
-      // l'attente est implicite en fin de bloc
+	// l'attente fonctionne dans une task !
 #pragma omp taskwait
-    } 
+      }
+    }
   }
   return 0;
 }
