@@ -29,15 +29,16 @@ et au matériel comment faire plusieurs choses à la fois.
   
   En Java, l'interface intégrée au langage à l'origine était un peu
   trop simpliste. Une interface de type POSIX a été ensuite rajoutée
-  dans la bibliothèque.
+  dans la bibliothèque et complété avec de nombreuses fonctions de
+  haut niveaux.
 
   Python et ruby, en collant aux opérateurs des langages compilés,
   atteignent pour l'instant un parallélisme limité. Perl, qui a pris
   un autre chemin, permet un parallélisme performant au prix d'une
   gymnastique intellectuelle différente des gymnastiques classiques.
 
-  Les codes suivants réalisent un "hello world" parallèle: deux hello à la
-  fois.
+  Les codes suivants réalisent un "hello world" parallèle:
+  - deux hello à la fois.
 
 ** Points importants des exemples suivants
    Exécution: un core-i7 quad-core hyperthreadé
@@ -64,15 +65,24 @@ et au matériel comment faire plusieurs choses à la fois.
 
 ce qui après compilation et exécution
 
-#+BEGIN_SRC sh :exports code
+#+BEGIN_SRC sh :exports both
 gcc -Wall -std=gnu99 Codeparallelisme/startC99.c -o bin/startC99 -lpthread
 bin/startC99
 #+END_SRC
 
-produit l'affichage suivant (systématique)
+produit l'affichage suivant
 
-: hello  world! de 0
-: hello  world! de 1
+#+RESULTS:
+| hello | world! | de | 2 |
+| hello | world! | de | 5 |
+| hello | world! | de | 6 |
+| hello | world! | de | 4 |
+| hello | world! | de | 1 |
+| hello | world! | de | 0 |
+| hello | world! | de | 8 |
+| hello | world! | de | 7 |
+| hello | world! | de | 3 |
+| hello | world! | de | 9 |
 
 ** Démarrer des threads en C++
 

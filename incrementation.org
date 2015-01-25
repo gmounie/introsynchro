@@ -55,3 +55,4 @@ produit l'affichage suivant (systématique)
 : compteur atomic: 8000 en 357 µs
 
 * La section critique
+* Les opérations vectorielles

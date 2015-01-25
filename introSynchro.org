@@ -34,49 +34,72 @@
 #+LATEX_HEADER_EXTRA:
 
 
-* Motivation, contenu et pré-requis
+* Introduction, motivation, contenu et pré-requis
 
-Le but est ici de regrouper des exercices, du code et des idées pour
-comprendre et faire comprendre les synchronisations utilisés dans les
-programmes parallèles modernes.
+** Fondamentaux
 
-Comme la langue influence la pensée, les exemples sont volontairement
-en plusieurs langages.
+*** Buts de ce document
 
-** Pré-requis
+    Le but de ce document est de regrouper des exercices, du code et des
+    idées pour comprendre et faire comprendre les synchronisations
+    utilisés dans les programmes parallèles modernes.
+    
+    Comme la langue influence la pensée, les exemples sont volontairement
+    dans plusieurs langages de programmation.
 
-Un ordinateur est une machine stupide [Gerard Berry], elle connait les
-4 opération en base 0 et 1, mais avec une capacité stockage
-d'information gigantesque, la capacité d'un disque dur est de l'odre
-de la masse solaire de notre galaxie, et rapide, puisque pendant une
-opération à 4Ghz, un photon parcourt 7.5cm.
+*** L'informatique consiste à faire faire des choses intelligentes à une grosse machine rapide ne sachant faire que des choses élémentaires stupides.
 
-L'informatique consiste donc à faire faire des choses intelligentes à
-une machine ne sachant faire que des choses élémentaires stupides.
+   Un ordinateur est une machine stupide [Gerard Berry], elle ne
+   connaît que les 4 opérations en base 0 et 1. Mais elle a une
+   capacité stockage d'information gigantesque, la capacité d'un
+   disque dur est de l'ordre de la masse solaire de notre
+   galaxie. Elle est aussi rapide, puisque pendant une opération à
+   4Ghz, un photon parcourt 7.5cm dans le vide.
 
-Pour cela, il y a 4 grands pans complémentaires à la discipline:
-- matériel :: comment construire cette machine stupide
-- algorithmique :: comment faire une chose intelligente de manière
-                   indépendante du matériel, mais évaluer sa
-                   performance en fonction du matériel
-- compilation :: traduire un langage précis, utilisé pour instancier
-                 un algorithme, dans les instructions élémentaires du
-                 matériel.
-- données :: l'art de manipuler des données est utilisé par les trois
-             pans précédents.
+   Il y a 4 grands pans complémentaires à la discipline:
+    - matériel :: comment construire cette machine à calcul programmable
+    - algorithmique :: exprimer une tâche intelligente pouvant être
+                       traduite en opération stupide. Évaluer la
+                       performance de la tâche en fonction de la
+                       quantité d'opérations stupides nécéssaire pour
+                       la faire.
+    - compilation :: traduire une tâche avec un langage précis dans
+                     les instructions élémentaires du matériel.
+    - données :: l'art de manipuler des données utilisé par les trois
+                 pans précédents.
+    
+    Le parallélisme, c'est l'art de faire plusieurs choses stupides en même
+    temps et cela à un impact sur les 4 pans.
 
-Le parallélisme, c'est l'art de faire plusieurs choses stupides en même
-temps et cela à un impact sur les 4 pans.
+    - matériel :: comment construire cette machine stupide faisant
+                  plusieurs choses à la fois
+    - algorithmique :: comment découper une tâche intelligente en
+                       plusieurs morceaux que l'on peut réaliser
+                       simultanément.
+    - compilation :: traduire des opérateurs parallèle de haut-niveau
+                     en instruction élémentaires s'exécutant parallèles
+    - données :: l'art de manipuler des données à plusieurs.
+
+** Résumé de la suite
+   La suite du document aborde les aspects suivants:
+   - Comment faire plusieurs choses en même temps dans [[Faire plusieurs
+     choses à la fois]]: lancement des activités parallèles dans
+     différents langages. Les points communs montrent bien les aspects
+     centraux. Les nuances mettent en lumière certains choix cachés
+     mais importants.
+   - Comment faire la même chose en même temps à plusieurs dans [[Faire
+     la même chose à plusieurs en même temps]]: 
+   - Comment communiquer à plusieurs [[ Transmettre des données]]
 
 * Faire plusieurs choses à la fois
 
 #+INCLUDE: parallelisme.org
 
-* Faire la même chose à plusieurs
+* Faire la même chose à plusieurs en même temps
 
 #+INCLUDE: incrementation.org
 
-* transmettre des données
+* Transmettre des données
 
 #+INCLUDE: asyncdata.org
 
