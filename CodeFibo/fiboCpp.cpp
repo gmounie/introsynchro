@@ -2,6 +2,7 @@
 #include <cassert>
 #include <iostream>
 #include <future>
+#include <sstream>
 
 long long int fibo(int n) {
   if (n < 2)
@@ -14,8 +15,9 @@ long long int fibo(int n) {
 
 int main(int argc, char **argv) {
   assert(argc == 2);
-  int n = atoi(argv[1]);
-
+  std::istringstream istr(argv[1]);
+  int n;
+  istr >> n;
   auto start = std::chrono::high_resolution_clock::now();
   long long int resu = fibo(n);
   auto end = std::chrono::high_resolution_clock::now();
