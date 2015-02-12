@@ -8,7 +8,7 @@ void hello(int i) {
 }
 
 int main() {
-  foreach(i; 0..2) {
+  foreach(i; 0..10) {
       spawn(&hello, i);
   }
   return 0;

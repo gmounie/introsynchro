@@ -17,16 +17,11 @@ int main(int argc, char **argv) {
   {
 #pragma omp single
     {
+      for(int i=0; i < NBTHR; i++) {
 #pragma omp task
-      {
-	for(int i; i < NBTHR; i++) {
-#pragma omp task
-	  {
-	    hello(i);
-	  }
+	{
+	  hello(i);
 	}
-	// l'attente fonctionne dans une task !
-#pragma omp taskwait
       }
     }
   }
