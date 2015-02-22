@@ -47,15 +47,27 @@ et au matériel comment faire plusieurs choses à la fois.
   - Dix "Hello world" à la fois
   - Chaque thread attends 5 seconde avant de terminer
 
-  Pour peaufiner la visualisation, le petit programme suivant, lit son
-  entrée standart et affiche chaque ligne lue avec la date courante
-  depuis son démarrage (en seconde)
+  Pour peaufiner la visualisation, le petit programme =perl= suivant,
+  lit son entrée standart et affiche chaque ligne lue avec la date
+  courante depuis son démarrage (en seconde)
 
 #+INCLUDE: "./tempusfugit.pl" src perl
 
-  Du coup, les programes forcent l'affichage immédiat (flush) pour
-  éviter tout délai dans le pipe séparant les programmes de celui
-  marquant les dates d'apparitions des messages.
+  Du coup, les programmes C, et assimilés, doivent forcer l'affichage
+  immédiat (=fflush=) pour éviter tout délai dans le pipe séparant les
+  programmes de celui marquant les dates d'apparitions des messages.
+
+  On peut aussi utiliser le mono-ligne awk suivant, par exemple
+#+BEGIN_SRC sh
+./startC99 | awk 'BEGIN {i=systime();} {print systime()-i,$0}'
+#+END_SRC
+
+  Enfin, le programme =ts= de =moreutils= fait le travail 
+
+#+BEGIN_SRC sh
+./startC99 | ts -s "%s"
+#+END_SRC
+
 
 ** Points importants des exemples suivants
    Exécution: un core-i7 quad-core hyperthreadé
