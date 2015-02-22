@@ -4,6 +4,7 @@ import core.thread;
 
 void hello(int i) {
   writeln("hello world! de ",i);
+  stdout.flush();
   Thread.sleep(5.seconds);
 }
 

@@ -6,6 +6,7 @@
 
 void hello(int a) {
   printf ("hello world! de %d\n", a);
+  fflush(stdout);
   sleep(5);
 }
 
