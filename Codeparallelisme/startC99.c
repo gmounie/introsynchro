@@ -7,6 +7,7 @@
 
 void *hello(void *a) {
   printf ("hello world! de %ld\n", (intptr_t)a);
+  fflush(stdout);
   sleep(5);
   return 0;
 }
