@@ -45,7 +45,7 @@ et au matériel comment faire plusieurs choses à la fois.
   intéressants sur les exécutions.
 
   - Dix "Hello world" à la fois
-  - Chaque thread attends 5 seconde avant de terminer
+  - Chaque thread attends 5 secondes avant de terminer
 
   Pour peaufiner la visualisation, le petit programme =perl= suivant,
   lit son entrée standart et affiche chaque ligne lue avec la date
@@ -69,6 +69,29 @@ et au matériel comment faire plusieurs choses à la fois.
 #+END_SRC
 
 
+* Comment démarrer une activité ?
+
+  Suivant les langages, le démarrage des threads sera plus ou moins
+  intégré et facile. En gros il y a trois grandes famille de langages:
+  
+  - pas d'intégration :: [[POSIX threads en C]] donne un  aperçu
+    de ce qui se passe dans le code de la plupart des autres
+    implantations.
+  - intégration dans la bibliothèque du langage :: Un /objet/ de type
+       =Thread= permet la création des activités parallèles. Il n'y a
+       pas d'interaction avec les autres opérateurs du langage.
+  - intégration dans le langage :: Un /objet/ de type =Thread= qui
+       interagit directement avec d'autres opérateurs du langage.
+       [[Ada]], [[Java]]
+
+
+* Comment attendre la fin des activités ?
+
+* Dans quel ordre seront executée les activités ?
+
+* L'affichage de petites lignes de texte ne pose aucun problème ?
+
+
 ** Points importants des exemples suivants
    Exécution: un core-i7 quad-core hyperthreadé
    - le multiplexage de l'accès au même fichier:
@@ -81,11 +104,12 @@ et au matériel comment faire plusieurs choses à la fois.
        OpenMP, ou en D, l'attente est implicite.
 
 
+* Les différentes versions
 
-** Démarrer des threads en C
+** C-11
 *** TODO Attendre la version de la glibc avec threads.h (C11)
 
-** Démarrer des POSIX threads en C
+** POSIX threads en C
    En pratique, la bibliothèque de threads implantée sous Linux est la
    bibliothèque POSIX. C'est elle qui est utilisé par la bibliothèque
    de C et de la quasi-totalité des autres languages.
@@ -96,7 +120,7 @@ ce qui après compilation et exécution
 
 #+BEGIN_SRC sh :exports both
 gcc -Wall -std=gnu99 Codeparallelisme/startC99.c -o bin/startC99 -lpthread
-bin/startC99
+bin/startC99 | ts -s
 #+END_SRC
 
 produit l'affichage suivant
@@ -113,7 +137,7 @@ produit l'affichage suivant
 | hello | world! | de | 3 |
 | hello | world! | de | 9 |
 
-** Démarrer des threads en C++
+** C++-11
 
 #+INCLUDE: Codeparallelisme/startCpp.cpp src C++
 
