@@ -53,6 +53,9 @@ startPerl:
 startAda: startada.adb
 	gnatmake -o startAda startada.adb
 
+startRust: startRust.rs
+	rustc -O $^
+
 clean:
 	rm -f $(EXEC) *.o *.ali
 
