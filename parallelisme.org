@@ -72,7 +72,7 @@ et au matériel comment faire plusieurs choses à la fois.
 * Comment démarrer une activité ?
 
   Suivant les langages, le démarrage des threads sera plus ou moins
-  intégré et facile. En gros il y a trois grandes famille de langages:
+  intégré et facile. En gros il y a trois grandes familles de langages:
   
   - pas d'intégration :: [[POSIX threads en C]] donne un  aperçu
     de ce qui se passe dans le code de la plupart des autres
@@ -88,7 +88,7 @@ et au matériel comment faire plusieurs choses à la fois.
 * Comment attendre la fin des activités ?
 
 * Dans quel ordre seront executée les activités ?
-
+  
 * L'affichage de petites lignes de texte ne pose aucun problème ?
 
 
@@ -227,7 +227,7 @@ Une exécution très stable.
 
 ** Démarrer des threads en D
 
-Une particularité importante est le fait que le main attende la
+Une particularité importante est le fait que le main attende par défaut la
 fin de tous les threads "spawnés" avant de terminer le processus.
 
 #+INCLUDE: Codeparallelisme/startD.d src D
@@ -243,6 +243,29 @@ donne systématiquement
 
 : hello world! de 1
 : hello world! de 0
+
+** Démarrer des treads en Rust
+
+#+INCLUDE: Codeparallelisme/startRust.rs src rust
+
+La compilation et le lancement
+#+BEGIN_SRC sh :exports both
+rustc -O Codeparallelisme/startRust.rs -o bin/startRust
+bin/startRust | ts -s
+#+END_SRC
+
+#+RESULTS:
+| 00:00:00 | Hello | world | from | 6 |
+| 00:00:00 | Hello | world | from | 0 |
+| 00:00:00 | Hello | world | from | 3 |
+| 00:00:00 | Hello | world | from | 7 |
+| 00:00:00 | Hello | world | from | 2 |
+| 00:00:00 | Hello | world | from | 5 |
+| 00:00:00 | Hello | world | from | 4 |
+| 00:00:00 | Hello | world | from | 1 |
+| 00:00:00 | Hello | world | from | 8 |
+| 00:00:00 | Hello | world | from | 9 |
+
 
 ** Démarrer des threads en Objective-C
 
